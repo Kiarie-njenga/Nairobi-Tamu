@@ -1,60 +1,248 @@
-{% extends "base.html" %}
 
+
+
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 
-    <header class="masthead">
-        <div class="overlay"></div>
-        <div class="container">
+
+
+
+
+   
+
+
+
+<div class="wrapper p-3 mt-1" style="list-style:none;">
+    <li class="nav-item   active" role="presentation"><a href="#001" style='color: #FF42AE;' class="text-decoration-none" aria-controls="001" role="tab">For You</a></li>
+     
+    {% if user.is_authenticated %}
+    {% for category in categories %} 
+    <li class="nav-item fw-bold" role="presentation"><a href="{% url 'categories'  title=category.name %}" style='color: #FF42AE;' class="text-decoration-none" aria-controls="002" role="tab"><b>{{category.name}}</b></a></li>
+    {% endfor %}
+    {% endif %}
+</div> 
+
+
+<div class="container-fluid">
+
+    
+
+    <div class="row   mt-3">
+
+        <div class="col-md-8">
             <div class="row">
-                <div class=" col-md-8 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to my awesome Blog </h3>
-                        <p class="text-light">We Love Django As much as you do &nbsp
-                        </p>
+                {% for profile in profiles %}
+        
+                <div class="col-md-3 d-flex my-1 col-sm">
+                    <div class="card shadow flex-fill">
+                        <img src="{{profile.photo.url}}" alt="" class="card-img-top"/>
+                            <div class="card-body">
+                                
+                                <strong><a href="{% url 'profile' profile.user.username %}" style="color: #FF42AE;">{{profile.user.username}} {{profile.phone}}</a></strong>
+                                <span class="product-name  text-muted"><i><b>{{profile.location}}</b></i></span>
+                        
+                            <div class="info-product" style="max-height:120px; overflow:hidden;">
+                                <p>{{profile.about}}</p>
+                            </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                <a href="{% url 'profile' profile.user.username %}" style="background-color: #FF42AE;" class="btn text-light float-right">View</a>
+                            </div>
+                        
                     </div>
+                </div>   
+            {% endfor %}
+            </div>
+           
+            
+            
+        </div>
+        
+       
+       <div class="col-md-3">
+        <div class="">
+           
+            <div style="background-color: #FF42AE;">
+                <h1 style="color:yellow">Featured</h1>
+                
+                <div class="col-sm mb-3 text-center border-left-1">
+                    <h4 style="color: white;">Jamila</h4>
+                    <h5 style="color: white;">0710146210</h5>
+                    <img src="{% static 'img/pp.jpg' %}" class="img-fluid rounded"/>
+                    <p class="text-light">0710146210 A mixed of age girls offering good job, finger beautying, tooth washing, raw washing, bj,cum </p>
+                    <button class="btn" style="background-color: yellow;">View</button>
+                </div>
+                <hr style="color:white"/>
+                <div class="col-sm  text-center">
+                    <h4 style="color: white;">Jamila</h4>
+                    <h5 style="color: white;">0710146210</h5>
+                    <img src="{% static 'img/pp.jpg' %}" class="img-fluid rounded"/>
+                    <p class="text-light">0710146210 A mixed of age girls offering good job, finger beautying, tooth washing, raw washing, bj,cum </p>
+                    <button class="btn" style="background-color: yellow;">View</button>
+                </div>
+                <hr style="color:white"/>
+            </div>
+
+            <div class="card my-4">
+                <h5 class="card-header" style="color: #FF42AE;">About Us</h5>
+                <div class="card-body">
+                    <p class="card-text"> Welcome to Nairobi Tamu, the site of beautiful Escort girls in Kenya, Massage parlours and ladies in Nairobi, sex workers, models and much more for your leisure and pleasure. They offer adults services in Kenya, maybe you may want one for the weekend just to give warmth and pleasure in the cold days. Browse NairobiTamu for more fun . Find the fun experience and make connections on Nairobi Tamu</p>
+                    <a href="{% url 'about' %}" class="btn text-white" style="background-color: #FF42AE;">Know more</a>
                 </div>
             </div>
-        </div>
-    </div>
-    </header>
-
-    <div class="container">
-        <div class="row">
-
-            <!-- Blog Entries Column -->
-            <div class="col-md-8 mt-3 left">
-                {% for post in post_list %}
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h2 class="card-title">{{ post.title }}</h2>
-                            <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}}  </p>
-
-                            <p class="card-text">{{post.content|safe|slice:":200" }}</p>
-                            <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
-                        </div>
-
-                    </div>
-                {% endfor %}
-
+            <div class="card my-4">
+                <h5 class="card-header" style="color: #FF42AE;">Services</h5>
+                <div class="card-body">
+                    <p class="card-text"> Nairobi Tamu offers offers the opportunity to meet all Kenyan Escorts from various counties in Kenya, Nairobi escorts, Escorts in Nakuru and Thika ladies NairobiTamu is there for you-.Nairobi Tamu is best and NairobiTamu escorts are perfect.</p>
+                    <a href="{% url 'services' %}" class="btn text-white" style="background-color: #FF42AE;">Know more</a>
+                </div>
             </div>
-            {% block sidebar %}
-                {% include 'sidebar.html' %}
-            {% endblock sidebar %}
+        </div> 
+    </div>
+    </div>
+</div>
+
+
+
+  
+
+
+<div class="container-fluid text-center">
+    <h2 style="color: #FF42AE;">Blog Posts</h2>
+</div>
+
+
+<div class="masonry mt-3">
+    {% for post in posts %}
+    
+    <div class="brick">
+        <div class="crd">
+            <a class="m-2 text-decoration-none text-dark" href="{% url 'post_detail' post.slug %}">
+                
+                        <img src="{{ post.thumbnail.url }}" class="content-img">
+                 
+                        <div class="overlay">
+                            <div class="text">
+                                <p class="fw-bold" style="
+                                overflow: hidden;
+                                color:white;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                width:150px;
+                                ">{{post.title}}</p>
+                            </div>
+                            <div class="text">
+                                <button class="btn btn-primary fw-bold rounded" style="
+                                
+                                
+                                position: absolute;
+                                right:5px;
+                                ">Save</button>
+                            </div>
+                            
+                            <div class="text">
+                                    <p class="fw-bold"  style="
+                                                position: absolute;
+                                                color:white;
+                                                bottom:3px;
+                                                left:3px;
+                                                ">{{post.category}}
+                                    </p>
+                            </div>
+                            
+                            
+                        </div>
+            </a>
+        </div>
+            
+            
+                    <div>
+                        <h5 class="card-title">{{post.title}}</h5>
+                        
+                        
+                      </div>
+                    
+        
+        
+    </div>
+
+   {% endfor %}
+</div>
+
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-6 col-sm">
+            <h3 style="color: #FF42AE;">Nairobi Escort Services</h3>
+            <p>Are you someone, who is looking for horny Sex Girls in Nairobi? Best Escorts in Kenya are just here,You have come to the right place then. Nairobi Tamu is among the platforms where you get abundant pleasure and satisfy your dirty fantasies in a hassle-free manner.
+                 Our website is designed to bridge the gap between you and Nairobi Tamu Ladies. You can call Nairobi Escort Girls and satisfy your wildest fantasies whenever you want. The Nairobi Raha Tamu Girls are available at just one call.
+                This means that you just need to visit our website and call Escort Ladies in Nairobi to ensure they come to your place with endless fun.
+                We make sure whenever you use our Nairobi Escort Services, the pleasure is all yours. You can also hire a sexy babe for Nairobi Escort Massage. 
+                . Our website never falls short on options when you are scrolling for the best Female Escorts in Nairobi. Hire girls for sex in Nairobi and let your pleasure reach its new heights. Now, finding Sexy girls In Nairobi is not at all a complicated affair anymore.
+                You just need to check our collection of Escorts in Nairobi Top Escorts Services In Kenya and you can pick any to enjoy Nairobi Sexy Girls Service. The Escort ladies are beautiful and give you that feeling of going on a tour to paradise. Now, hire Nairobi Sensual Escorts and let the fun begin. Call girls with sex in Nairobi are just a call away, Choose our Call Girls For Sex in Kenya.
+                Nairobi remains best of Kenya Top Escort Services,Kenya Escort Girls,Hot Call Girl KenyaFemale Escorts Service Kenya, Exotic Sex Girl Kenya,Massage Escort in Kenya,NairobiTamu
+                
+                </p>
+        </div>
+        <div class="col-md-6 col-sm">
+           
+            <form action="" method="post">
+                {% if new_contact %}
+                        <div class="alert alert-success" role="alert">
+                            Success wait for a few minutes for us to respond.
+                        </div>
+                    {% else %}
+                        <h3 style="color: #FF42AE;">Contact Us</h3>
+                        <form method="post" style="margin-top: 1.3em;">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            
+                            <button type="submit" class="btn btn-lg text-light" style="background-color: #FF42AE;">Submit</button>
+                        </form>
+                        <p>For support info@nairobitamu.com</p>
+                        <p>Text Only 0782437794</p>
+                {% endif %}
+            </form>
+         
         </div>
     </div>
-    {% if is_paginated %}
-        <nav aria-label="Page navigation conatiner"></nav>
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-                <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-                <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+   
+</div>
 
-            {% endif %}
-        </ul>
-        </nav>
-        </div>
-    {% endif %}
-{%endblock%}
+
+<script src="https://unpkg.com/@appnest/masonry-layout/umd/masonry-layout.min.js"></script>
+<script>
+   $('#myCarousel').carousel({
+  interval: 10000
+})
+
+$('.carousel .carousel-item').each(function(){
+    var minPerSlide = 3;
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    for (var i=0;i<minPerSlide;i++) {
+        next=next.next();
+        if (!next.length) {
+        	next = $(this).siblings(':first');
+      	}
+        
+        next.children(':first-child').clone().appendTo($(this));
+      }
+});
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+
+
+
+
+
+
+{% extends 'base.html' %}
+
+{% block title %}<title>Delete Blog</title>{% endblock title %}
+{% block content %}
+
+<div class="container p-3"style="background-color: white;" >
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete</p>
+        <button class="btn btn-danger ml-􀇑" type="submit">Confirm</button>
+    </form>
+</div>
+
+
+{% endblock content %}

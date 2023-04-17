@@ -20,16 +20,18 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 import debug_toolbar
 
-from blog.sitemaps import PostSitemap
+from blog.sitemaps import PostSitemap, ProfileSitemap
 
 sitemaps = {
     "posts": PostSitemap,
+    'profiles':ProfileSitemap
 }
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blog.urls"), name="blog-urls"),
-    path("summernote/", include("django_summernote.urls")),
+    #path("summernote/", include("django_summernote.urls")),
+    path('profiles/', include('profiles.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
 ]

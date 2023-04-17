@@ -26,7 +26,7 @@ SECRET_KEY = "0x!b#(1*cd73w$&azzc6p+essg7v=g80ls#z&xcx*mpemx&@9$"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     'debug_toolbar',
     "blog",
+    'profiles',
     "crispy_forms",
-    "django_summernote",
+    'ckeditor',
+    #"django_summernote",
 ]
 
 
@@ -158,3 +160,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+AUTH_USER_MODEL='profiles.User'
+LOGIN_URL='user_login'

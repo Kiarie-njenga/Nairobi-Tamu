@@ -1,16 +1,17 @@
 from django.contrib import admin
-from django_summernote.admin import SummernoteModelAdmin
+#from django_summernote.admin import SummernoteModelAdmin
 
-from .models import Comment, Post
+from .models import Comment, Post, Category
 
 
-class PostAdmin(SummernoteModelAdmin):
+class PostAdmin(admin.ModelAdmin):
+   
     list_display = ("title", "slug", "status", "created_on")
     list_filter = ("status", "created_on")
     search_fields = ["title", "content"]
     prepopulated_fields = {"slug": ("title",)}
 
-    summernote_fields = ("content",)
+    #summernote_fields = ("content",)
 
 
 @admin.register(Comment)
@@ -25,3 +26,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Category)

@@ -1,0 +1,101 @@
+
+
+
+
+
+
+
+{% extends "base.html" %}
+{% block content %}
+
+
+    
+<!-- Latest compiled and minified CSS -->
+
+      
+   
+<div class="row">
+    {% for profile in profiles %}
+
+    <div class="col-md-3 d-flex my-1 col-sm">
+        <div class="card shadow flex-fill">
+            <img src="{{profile.photo.url}}" alt="" class="card-img-top"/>
+                <div class="card-body">
+                    
+                    <strong><a href="{% url 'profile' profile.user.username %}" style="color: #FF42AE;">{{profile.user.username}} {{profile.phone}}</a></strong>
+                    <span class="product-name  text-muted"><i><b>{{profile.location}}</b></i></span>
+            
+                <div class="info-product" style="max-height:120px; overflow:hidden;">
+                    <p>{{profile.about}}</p>
+                </div>
+                </div>
+                
+                <div class="card-footer">
+                    <a href="{% url 'profile' profile.user.username %}" style="background-color: #FF42AE;" class="btn text-light float-right">View</a>
+                </div>
+            
+        </div>
+    </div>   
+{% endfor %}
+</div>
+<h3 class="text-center">Blog Posts</h3>
+
+<div class="masonry">
+    {% for post in posts %}
+    
+    <div class="brick">
+        <div class="crd">
+            <a class="m-2 text-decoration-none text-dark" href="{% url 'post_detail' post.slug %}">
+                
+                        <img src="{{ post.thumbnail.url }}" class="content-img">
+                 
+                        <div class="overlay">
+                            <div class="text">
+                                <p class="fw-bold" style="
+                                overflow: hidden;
+                                color:white;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                width:150px;
+                                ">{{post.title}}</p>
+                            </div>
+                            <div class="text">
+                                <button class="btn btn-primary fw-bold rounded" style="
+                                
+                                
+                                position: absolute;
+                                right:5px;
+                                ">Save</button>
+                            </div>
+                            
+                            <div class="text">
+                                    <p class="fw-bold"  style="
+                                                position: absolute;
+                                                color:white;
+                                                bottom:3px;
+                                                left:3px;
+                                                ">{{post.category}}
+                                    </p>
+                            </div>
+                            
+                            
+                        </div>
+            </a>
+        </div>
+            
+            
+                    <div>
+                        <h5 class="card-title">{{post.title}}</h5>
+                        
+                        
+                      </div>
+                    
+        
+        
+    </div>
+    
+   {% endfor %}
+</div>
+
+<script src="https://unpkg.com/@appnest/masonry-layout/umd/masonry-layout.min.js"></script>
+{% endblock %}
