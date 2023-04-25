@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import cloudinary_storage
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
     #'debug_toolbar',
+    'cloudinary_storage',
+    'cloudinary',
     "blog",
     'profiles',
     "crispy_forms",
@@ -60,6 +62,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CLOUDINARY_STORAGE={
+    'CLOUD_NAME':'dp1xn4eww',
+    'API_KEY':'597534271746469',
+    'API_SECRET':'jbOOyH-rybYkU44v7A9ooc3hyRw',
+}
 
 ROOT_URLCONF = "mysite.urls"
 
@@ -151,7 +159,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Base url to serve media files
 MEDIA_URL = "/media/"
-
+DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
