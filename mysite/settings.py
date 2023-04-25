@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    'debug_toolbar',
+    #'debug_toolbar',
     "blog",
     'profiles',
     "crispy_forms",
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -64,9 +64,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "mysite.urls"
 
 # Django Debug Toolbar https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+#INTERNAL_IPS = ['127.0.0.1',]
 
 
 TEMPLATES = [
